@@ -7,8 +7,14 @@ import torch
 #from scipy.misc import toimage
 from PIL import Image
 from tqdm import tqdm
-from pytorch_pretrained_biggan import (BigGAN, one_hot_from_names, truncated_noise_sample,
-                                       save_as_images, display_in_terminal)
+#from pytorch_pretrained_biggan import (BigGAN, one_hot_from_names, truncated_noise_sample,
+ #                                      save_as_images, display_in_terminal)
+import torchvision
+import torchvision.transforms as T
+import torch.nn.functional as F
+import urllib.request
+import io
+
 
 #get input arguments
 parser = argparse.ArgumentParser()
@@ -95,7 +101,7 @@ else:
 
 
 # Load pre-trained model
-model = BigGAN.from_pretrained(model_name)
+model = torch.hub.load('facebookresearch/BigGAN', model_name, pretrained=True)
 
 #set device
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
